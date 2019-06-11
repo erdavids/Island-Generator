@@ -1,8 +1,8 @@
 # Island Generator
 
-This project utilizes a Perlin noise library to generate a height map of values from -1 to 1. Assigning colors to differen value ranges helps simulate elevation levels. With a few tweaks of the scale and offset, the resulting archipelagoes look great!
+This project utilizes a Perlin noise library to generate a height map of values from -1 to 1. Assigning colors to different value ranges helps simulate elevation levels. With a few tweaks of the scale and offset, the resulting archipelagoes look great!
 
-Like any other project, there are many improvements I would like to make:
+Like any other project, there are many improvements I would like to add:
 
   * Use another Perlin height map to apply biome details
   * Generate clouds
