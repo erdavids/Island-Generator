@@ -9,6 +9,7 @@ def main():
     parser.add_argument("--height", default=1500, type=int)
     parser.add_argument("-s", "--scale", default=200.0, type=float)
     parser.add_argument("-o", "--octaves", default=6, type=int)
+    parser.add_argument("-m", "--moisture", action="store_true")
     parser.add_argument("-p", "--persistence", default=.5, type=float)
     parser.add_argument("-l", "--lacunarity", default=2.0, type=float)
     parser.add_argument("-b", "--base", default=0, type=int)
@@ -31,6 +32,7 @@ def main():
     base = args.base
     detail = args.detail
     alter = args.alter
+    moisture = args.moisture
 
     max_distance = args.max_distance
     pil_image = Image.new('RGBA', (width, height))
@@ -77,7 +79,21 @@ def main():
             elif (int(pixel_value * 100.0) > 0 - alter):
                 pixels[i, j] = (236, 212, 184)
 
-    pil_image.save('Generative-Space-Texture.png')
+            # if moisture == True:
+            #     moisture_value = noise.pnoise2((offset+i)/(scale/5),
+            #                                 (offset+j)/(scale/5),
+            #                                 octaves,
+            #                                 persistence,
+            #                                 lacunarity,
+            #                                 width,
+            #                                 height,
+            #                                 base)
+            #
+            #     if (int(pixel_value * 100.0) > 5 and int(pixel_value * 100.0) < 20):
+            #         if int(moisture_value * 100.0) > 0:
+            #             pixels[i, j] = (int(pixels[i, j][0] * 1.4), int(pixels[i, j][1] * 1.4), int(pixels[i, j][2] * 1.4))
+
+    pil_image.save('Examples/Island-' + str(offset) + '-w-' + str(width) + '-h-' + str(height) + '.png')
 
 if __name__ == "__main__":
     main()
