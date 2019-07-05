@@ -31,6 +31,9 @@ def main():
 
     pixels = pil_image.load()
 
+    cl = [(127, 199, 175), (218, 216, 167), (167, 219, 216), (237, 118, 112)]
+    last_color = (0, 0, 0)
+
     for i in range(pil_image.size[0]):
         for j in range(pil_image.size[1]):
 
@@ -50,18 +53,18 @@ def main():
 
             pixel_value -= math.pow(gradient_perc, 3)
 
-            if (int(pixel_value * 100.0) > 30 - alter):
-                pixels[i, j] = (240, 240, 240)
-            elif (int(pixel_value * 100.0) > 20 - alter):
-                pixels[i, j] = (200, 200, 200)
-            elif (int(pixel_value * 100.0) > 5 - alter):
-                pixels[i, j] = (134, 164, 114)
-            elif (int(pixel_value * 100.0) > 0 - alter):
-                pixels[i, j] = (236, 212, 184)
+            if (int(pixel_value * 100.0) > 30):
+                pixels[i, j] = cl[0]
+            elif (int(pixel_value * 100.0) > 10):
+                pixels[i, j] = cl[3]
+            elif (int(pixel_value * 100.0) > -10):
+                pixels[i, j] = cl[2]
+            elif (int(pixel_value * 100.0) > -30):
+                pixels[i, j] = cl[1]
             else:
-                pixels[i, j] = (153, 162, 157)
+                pixels[i, j] = cl[0]
 
-    pil_image.save('Examples/Island-' + str(offset) + '-w-' + str(width) + '-h-' + str(height) + '.png')
+    pil_image.save('Examples/Color-' + str(offset) + '-w-' + str(width) + '-h-' + str(height) + '.png')
 
 if __name__ == "__main__":
     main()
