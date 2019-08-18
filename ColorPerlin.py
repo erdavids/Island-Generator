@@ -2,6 +2,9 @@ import PIL, random, sys, argparse, math
 from PIL import Image, ImageDraw
 import noise
 
+r = lambda: random.randint(30,235)
+rc = lambda: ('#%02X%02X%02X' % (r(),r(),r()))
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--width", default=1500, type=int)
@@ -31,8 +34,9 @@ def main():
 
     pixels = pil_image.load()
 
-    cl = [(127, 199, 175), (218, 216, 167), (167, 219, 216), (237, 118, 112)]
-    last_color = (0, 0, 0)
+    cl = []
+    for i in range(10):
+        cl.append((r(), r(), r()))
 
     for i in range(pil_image.size[0]):
         for j in range(pil_image.size[1]):
@@ -53,16 +57,26 @@ def main():
 
             pixel_value -= math.pow(gradient_perc, 3)
 
-            if (int(pixel_value * 100.0) > 30):
-                pixels[i, j] = cl[0]
-            elif (int(pixel_value * 100.0) > 10):
+            if (int(pixel_value * 100.0) > 40):
+                pixels[i, j] = cl[5]
+            elif (int(pixel_value * 100.0) > 30):
+                pixels[i, j] = cl[4]
+            elif (int(pixel_value * 100.0) > 20):
                 pixels[i, j] = cl[3]
-            elif (int(pixel_value * 100.0) > -10):
+            elif (int(pixel_value * 100.0) > 10):
                 pixels[i, j] = cl[2]
+            elif (int(pixel_value * 100.0) > 0):
+                pixels[i, j] = cl[1]
+            elif (int(pixel_value * 100.0) > -10):
+                pixels[i, j] = cl[4]
+            elif (int(pixel_value * 100.0) > -20):
+                pixels[i, j] = cl[3]
             elif (int(pixel_value * 100.0) > -30):
+                pixels[i, j] = cl[2]
+            elif (int(pixel_value * 100.0) > -40):
                 pixels[i, j] = cl[1]
             else:
-                pixels[i, j] = cl[0]
+                pixels[i, j] = (20, 30, 35)
 
     pil_image.save('Examples/Color-' + str(offset) + '-w-' + str(width) + '-h-' + str(height) + '.png')
 
